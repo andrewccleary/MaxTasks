@@ -7,35 +7,84 @@
     android:layout_height="match_parent"
     tools:context=".CreateTaskActivity">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        >
+        android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-        </FrameLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/drawer_view"
-            app:headerLayout="@layout/nav_header"/>
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title" />
 
-    </android.support.v4.widget.DrawerLayout>
+                <EditText
+                android:id="@+id/taskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textAutoCorrect"/>
+
+                <TextView
+                    android:id="@+id/priority_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Priority" />
+
+                <Spinner
+                    android:id="@+id/priority_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:entries="@array/priorities"
+                    android:fadeScrollbars="true" />
+
+                <TextView
+                    android:id="@+id/task_type_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type" />
+
+                <Spinner
+                    android:id="@+id/task_type_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:entries="@array/task_types"
+                    android:fadeScrollbars="true"
+                    android:prompt="@string/select_task_type" />
+
+                <TextView
+                    android:id="@+id/notes_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notes" />
+
+                <EditText
+                android:id="@+id/taskNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+                <Button
+                    android:id="@+id/add_task_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Next"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

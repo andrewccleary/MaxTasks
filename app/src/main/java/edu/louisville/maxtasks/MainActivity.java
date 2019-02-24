@@ -9,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private Button mAddTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        mAddTaskButton = findViewById(R.id.new_task_button);
+
+        mAddTaskButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class);
+                startActivity(intent);
+            }
+        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -41,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
                         if(menuItem.getItemId() == R.id.nav_tasks){
-                            Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class);
+                            //Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class);
+                            //startActivity(intent);
+                        }else if(menuItem.getItemId() == R.id.nav_analysis){
+                            Intent intent = new Intent(MainActivity.this, TaskAnalysisActivity.class);
                             startActivity(intent);
                         }
-
-
-
                         return true;
                     }
                 });

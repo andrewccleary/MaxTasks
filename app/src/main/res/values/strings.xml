@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MaxTasks</string>
+
+    <string name="select_task_type">Task Type</string>
+
+    <string-array name="task_types">
+        <item>Homework</item>
+        <item>Project</item>
+        <item>Exam</item>
+        <item>Activity</item>
+    </string-array>
+
+    <string-array name="priorities">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
 </resources>

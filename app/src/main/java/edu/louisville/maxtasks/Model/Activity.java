@@ -1,4 +1,4 @@
-package edu.louisville.maxtasks;
+package edu.louisville.maxtasks.Model;
 
 import java.util.Date;
 

@@ -1,16 +1,17 @@
-package edu.louisville.maxtasks;
+package edu.louisville.maxtasks.Model;
 
 import java.util.Date;
 
-public class Homework extends Task {
+import edu.louisville.maxtasks.Model.Task;
+
+public class Project extends Task {
     private Date dueDate;
     private Date startDate;
     private int expectedDuration;
     private String className;
     private float grade;
 
-
-    public Homework(String taskName, int priority, String notes, Date dueDate, Date startDate, int expectedDuration, String className){
+    public Project(String taskName, int priority, String notes, Date dueDate, Date startDate, int expectedDuration, String className){
         super(taskName, priority, notes);
         this.dueDate = dueDate;
         this.startDate = startDate;
