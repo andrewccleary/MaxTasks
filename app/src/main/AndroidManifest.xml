@@ -25,7 +25,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".TaskAnalysisActivity"></activity>
+        <activity android:name=".TaskAnalysisActivity" />
+        <activity android:name=".TaskViewActivity"></activity>
     </application>
 
 </manifest>
