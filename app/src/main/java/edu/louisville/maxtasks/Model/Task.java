@@ -1,8 +1,9 @@
 package edu.louisville.maxtasks.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Task {
+public class Task implements Serializable {
     private String taskName;
     private int priority;
     private List<Notification> notifications;

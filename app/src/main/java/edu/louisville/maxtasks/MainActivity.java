@@ -7,20 +7,42 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+
+import edu.louisville.maxtasks.Model.Task;
+import edu.louisville.maxtasks.Model.TaskList;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    private Button mAddTaskButton;
+    private ImageButton mAddTaskButton;
+    private TaskList tasks;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tasks = new TaskList();
+
+        tasks.Add("Micro Test",1,"This is a test");
+        tasks.Add("SE homework",1,"This is a test");
+        tasks.Add("Meeting",1,"This is a test");
+        tasks.Add("Bla bla bla",1,"This is a test");
+        tasks.Add("Android studio sucks",1,"This is a test");
+        tasks.Add("Android studio is very slow",1,"This is a test");
+
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mAddTaskButton = findViewById(R.id.new_task_button);
+
+        listView = (ListView)findViewById(R.id.simpleListView);
+        ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), tasks);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class).putExtra("Task", tasks.GetTask(i));
+                startActivity(intent);
+            }
+        });
 
         mAddTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -61,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+
+
     }
 
     @Override

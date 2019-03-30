@@ -15,7 +15,8 @@
         <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+            tools:ignore="ExtraText">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,13 +25,35 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-            <Button
-                android:id="@+id/new_task_button"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="New Task"/>
-    </FrameLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="45dp"
+                android:orientation="vertical">
+
+
+                <ListView
+                    android:id="@+id/simpleListView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#dbdbdb"
+                    android:dividerHeight="1dp"
+                    android:footerDividersEnabled="false" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/new_task_button"
+                android:background="@drawable/circle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_action_name"
+                android:scaleType="centerInside"
+                android:layout_gravity="bottom|right"
+                />
+        </FrameLayout>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
