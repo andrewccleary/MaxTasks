@@ -8,7 +8,7 @@ public class Activity extends Task {
     private String activityType;
 
     public Activity(String taskName, int priority, String notes, Date startDate, Date endDate, String activityType){
-        super(taskName, priority, notes);
+        super(taskName, priority, "Activity",notes);
         this.startDate = startDate;
         this.endDate = endDate;
         this.activityType = activityType;

@@ -6,13 +6,15 @@ import java.util.List;
 public class Task implements Serializable {
     private String taskName;
     private int priority;
+    private String category;
     private List<Notification> notifications;
     private boolean completed;
     private String notes;
 
-    public Task(String taskName, int priority, String notes){
+    public Task(String taskName, int priority, String category, String notes){
         this.taskName = taskName;
         this.priority = priority;
+        this.category = category;
         this.notes = notes;
 
         this.completed = false;
@@ -40,6 +42,14 @@ public class Task implements Serializable {
 
     public void setCompleted(boolean b){
         this.completed = b;
+    }
+
+    public String getCategory(){
+        return this.category;
+    }
+
+    public void setCategory(String s){
+        this.category = s;
     }
 
     public String getNotes(){

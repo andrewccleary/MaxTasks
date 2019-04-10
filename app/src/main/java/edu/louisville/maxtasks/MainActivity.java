@@ -34,15 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         tasks = new TaskList();
 
-        tasks.Add("Micro Test",1,"This is a test");
-        tasks.Add("SE homework",2,"This is a test");
-        tasks.Add("Meeting",3,"This is a test");
-        tasks.Add("Bla bla bla",4,"This is a test");
-        tasks.Add("Android studio sucks",5,"This is a test");
-        tasks.Add("Android studio is very slow",6,"This is a test");
-
-
-
+        tasks.Add("MongoDB Exam",1,"Exam", "MongoDB in a Distributed Setting");
+        tasks.Add("CECS 550 Homework 4",3,"Homework","Submit by April 17");
+        tasks.Add("Capstone Team Meeting",3,"Activity","April 19, 2019");
+        tasks.Add("SQL Injection Paper",4,"Homework","Complete Final Draft");
+        tasks.Add("Open Source Security Project",5,"Project","Group Project w/ Celine");
+        tasks.Add("Finish MaxTasks",6,"Project","Please hurry!");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,21 +51,21 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mAddTaskButton = findViewById(R.id.new_task_button);
 
-        listView = (ListView)findViewById(R.id.simpleListView);
+        listView = findViewById(R.id.simpleListView);
         ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), tasks);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class).putExtra("Task", tasks.GetTask(i));
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
         mAddTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -85,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
                         if(menuItem.getItemId() == R.id.nav_tasks){
-                            //Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(MainActivity.this, TaskViewActivity.class);
+                            startActivity(intent);
                         }else if(menuItem.getItemId() == R.id.nav_analysis){
                             Intent intent = new Intent(MainActivity.this, TaskAnalysisActivity.class);
                             startActivity(intent);
@@ -106,5 +103,21 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                Task task = (Task)data.getSerializableExtra("Task");
+                tasks.Add(task);
+            }
+        }else if (requestCode ==2){
+            if(resultCode == RESULT_OK) {
+                Task task = (Task)data.getSerializableExtra("Task");
+                tasks.Add(task);
+            }
+        }
     }
 }

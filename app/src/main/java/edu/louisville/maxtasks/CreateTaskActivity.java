@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,7 +17,7 @@ public class CreateTaskActivity extends AppCompatActivity   {
 
     private Spinner mTaskPriority, mTaskTypeSpinner;
     private EditText mTaskName, mTaskNotes;
-
+    private Button mSaveButton;
     private Task task;
 
     @Override
@@ -28,16 +29,43 @@ public class CreateTaskActivity extends AppCompatActivity   {
         mTaskTypeSpinner = findViewById(R.id.task_type_spinner);
         mTaskName = findViewById(R.id.taskName);
         mTaskNotes = findViewById(R.id.taskNotes);
+        mSaveButton = findViewById(R.id.save_task_button);
 
-        Intent i = getIntent();
-        if(i != null)
+        Intent intent = getIntent();
+
+        if(intent != null)
         {
-            this.task = (Task)i.getSerializableExtra("Task");
-            this.mTaskName.setText(task.getTaskName());
-            this.mTaskPriority.setSelection(((ArrayAdapter<String>)mTaskPriority.getAdapter()).getPosition((Integer.toString(task.getPriority()))));
-            this.mTaskNotes.setText(task.getNotes());
+            this.task = (Task)intent.getSerializableExtra("Task");
 
+            if(task != null){
+                this.mTaskName.setText(task.getTaskName());
+                this.mTaskPriority.setSelection(((ArrayAdapter<String>)mTaskPriority.getAdapter()).getPosition((Integer.toString(task.getPriority()))));
+                this.mTaskTypeSpinner.setSelection(((ArrayAdapter<String>)mTaskTypeSpinner.getAdapter()).getPosition(task.getCategory()));
+                this.mTaskNotes.setText(task.getNotes());
+            }
         }
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(task != null){
+                    task.setTaskName(mTaskName.getText().toString());
+                    task.setPriority(Integer.parseInt(mTaskPriority.getSelectedItem().toString()));
+                    task.setCategory(mTaskTypeSpinner.getSelectedItem().toString());
+                    task.setNotes(mTaskNotes.getText().toString());
+                }else{
+                    task = new Task(mTaskName.getText().toString(),
+                            Integer.parseInt(mTaskPriority.getSelectedItem().toString()),
+                            mTaskTypeSpinner.getSelectedItem().toString(),
+                            mTaskNotes.getText().toString());
+                }
+
+                Intent intent = new Intent();
+                intent.putExtra("Task", task);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
 
     }
 }

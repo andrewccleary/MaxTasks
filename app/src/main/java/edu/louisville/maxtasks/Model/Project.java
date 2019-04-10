@@ -12,7 +12,7 @@ public class Project extends Task {
     private float grade;
 
     public Project(String taskName, int priority, String notes, Date dueDate, Date startDate, int expectedDuration, String className){
-        super(taskName, priority, notes);
+        super(taskName, priority,"Project", notes);
         this.dueDate = dueDate;
         this.startDate = startDate;
         this.expectedDuration = expectedDuration;

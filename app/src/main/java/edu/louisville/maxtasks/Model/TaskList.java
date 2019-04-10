@@ -21,9 +21,9 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void Add(String taskName, int priority, String notes)
+    public void Add(String taskName, int priority, String category, String notes)
     {
-        Task task = new Task(taskName, priority, notes);
+        Task task = new Task(taskName, priority, category, notes);
         this.Add(task);
     }
 
@@ -32,6 +32,13 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public void Update(Task task){
 
+        for(int x = 0; x < tasks.size(); x++){
+            if (tasks.get(x).getTaskName() == task.getTaskName()){
+                tasks.set(x, task);
+            }
+        }
+    }
 
 }

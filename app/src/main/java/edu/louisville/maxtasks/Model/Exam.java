@@ -9,7 +9,7 @@ public class Exam extends Task {
     private float grade;
 
     public Exam(String taskName, int priority, String notes, Date startTime, Date endTime, String className){
-        super(taskName, priority, notes);
+        super(taskName, priority,"Exam", notes);
         this.startTime = startTime;
         this.endTime = endTime;
         this.className = className;
