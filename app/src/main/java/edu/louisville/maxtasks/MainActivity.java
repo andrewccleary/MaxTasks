@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
         tasks = new TaskList();
 
         tasks.Add("Micro Test",1,"This is a test");
-        tasks.Add("SE homework",1,"This is a test");
-        tasks.Add("Meeting",1,"This is a test");
-        tasks.Add("Bla bla bla",1,"This is a test");
-        tasks.Add("Android studio sucks",1,"This is a test");
-        tasks.Add("Android studio is very slow",1,"This is a test");
+        tasks.Add("SE homework",2,"This is a test");
+        tasks.Add("Meeting",3,"This is a test");
+        tasks.Add("Bla bla bla",4,"This is a test");
+        tasks.Add("Android studio sucks",5,"This is a test");
+        tasks.Add("Android studio is very slow",6,"This is a test");
 
 
 
