@@ -13,17 +13,17 @@
         android:fitsSystemWindows="true">
 
         <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             tools:ignore="ExtraText">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_action_name"
+                android:src="@drawable/ic_menu"
                 android:scaleType="centerInside"
                 android:layout_gravity="bottom|right"
                 />

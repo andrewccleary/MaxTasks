@@ -21,6 +21,7 @@ public class CreateTaskActivity extends AppCompatActivity   {
     private Task task;
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
@@ -39,6 +40,7 @@ public class CreateTaskActivity extends AppCompatActivity   {
 
             if(task != null){
                 this.mTaskName.setText(task.getTaskName());
+
                 this.mTaskPriority.setSelection(((ArrayAdapter<String>)mTaskPriority.getAdapter()).getPosition((Integer.toString(task.getPriority()))));
                 this.mTaskTypeSpinner.setSelection(((ArrayAdapter<String>)mTaskTypeSpinner.getAdapter()).getPosition(task.getCategory()));
                 this.mTaskNotes.setText(task.getNotes());

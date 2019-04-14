@@ -7,18 +7,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import edu.louisville.maxtasks.Model.Task;
-import edu.louisville.maxtasks.Model.TaskList;
+import edu.louisville.maxtasks.TaskList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
                         if(menuItem.getItemId() == R.id.nav_tasks){
-                            Intent intent = new Intent(MainActivity.this, TaskViewActivity.class);
-                            startActivity(intent);
+                            //Intent intent = new Intent(MainActivity.this, TaskViewActivity.class);
+                            //startActivity(intent);
                         }else if(menuItem.getItemId() == R.id.nav_analysis){
                             Intent intent = new Intent(MainActivity.this, TaskAnalysisActivity.class);
                             startActivity(intent);
@@ -91,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
-
     }
 
     @Override

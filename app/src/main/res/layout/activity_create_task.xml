@@ -28,11 +28,11 @@
                     android:text="Title" />
 
                 <EditText
-                android:id="@+id/taskName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textAutoCorrect"/>
+                    android:id="@+id/taskName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textAutoCorrect"/>
 
                 <TextView
                     android:id="@+id/priority_text_view"
@@ -68,11 +68,11 @@
                     android:text="Notes" />
 
                 <EditText
-                android:id="@+id/taskNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine" />
+                    android:id="@+id/taskNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textMultiLine" />
 
                 <Button
                     android:id="@+id/save_task_button"

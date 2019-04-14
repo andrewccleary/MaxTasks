@@ -38,4 +38,3 @@ public class Activity extends Task {
         this.activityType = s;
     }
 }
-

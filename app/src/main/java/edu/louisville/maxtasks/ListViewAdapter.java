@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.zip.Inflater;
 
 import edu.louisville.maxtasks.Model.Task;
-import edu.louisville.maxtasks.Model.TaskList;
+import edu.louisville.maxtasks.TaskList;
 
 public class ListViewAdapter extends BaseAdapter {
     Context context;

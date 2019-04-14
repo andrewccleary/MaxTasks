@@ -1,7 +1,9 @@
-package edu.louisville.maxtasks.Model;
+package edu.louisville.maxtasks;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.louisville.maxtasks.Model.Task;
 
 public class TaskList {
     private List<Task> tasks;
