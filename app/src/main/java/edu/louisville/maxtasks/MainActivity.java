@@ -1,6 +1,7 @@
 package edu.louisville.maxtasks;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,14 +12,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import edu.louisville.maxtasks.Model.Task;
 import edu.louisville.maxtasks.TaskList;
 
 public class MainActivity extends AppCompatActivity {
-
     private DrawerLayout mDrawerLayout;
     private ImageButton mAddTaskButton;
     private TaskList tasks;
@@ -51,13 +53,23 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.simpleListView);
         ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), tasks);
         listView.setAdapter(adapter);
+
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_LONG);
+            }
+        });*/
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class).putExtra("Task", tasks.GetTask(i));
-                startActivityForResult(intent, 2);
+                //Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class).putExtra("Task", tasks.GetTask(i));
+               // startActivityForResult(intent, 2);
+                Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_LONG);
             }
         });
+
 
         mAddTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
