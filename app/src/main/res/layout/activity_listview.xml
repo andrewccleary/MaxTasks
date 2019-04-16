@@ -2,24 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/checkbox"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:buttonTint="@color/colorAccent"
+            android:textColor="#1c1c1c"
+            android:layout_weight="3"
+            android:text="CheckBox" />
+
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+
+            android:padding="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_gravity="right" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textColor="#1c1c1c"
-        android:layout_weight="3"
-        android:text="CheckBox" />
-
-    <ImageButton
-        android:id="@+id/editButton"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_edit"
-
-        android:padding="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_gravity="right" />
+        android:paddingTop="0dp"
+        android:paddingLeft="40dp"
+        android:paddingBottom="10dp"
+        android:text="this is a test"/>
 </LinearLayout>

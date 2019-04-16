@@ -3,6 +3,7 @@ package edu.louisville.maxtasks;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,8 @@ public class ListViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.activity_listview, null,true);
             holder.imageButton = (ImageButton) view.findViewById(R.id.editButton);
-            holder.checkBox = (CheckBox) view.findViewById(R.id.checkbox);
-
+            holder.checkBox = (CheckBox)view.findViewById(R.id.checkbox);
+            holder.textView = (TextView)view.findViewById(R.id.description);
             view.setTag(holder);
         }
         else
@@ -69,6 +70,7 @@ public class ListViewAdapter extends BaseAdapter {
         }
         Task task = tasks.Tasks().get(i);
         holder.checkBox.setText(task.getTaskName());
+        holder.textView.setText(task.getNotes());
 
         holder.imageButton.setTag(R.integer.btn_edit, view);
         holder.imageButton.setTag(R.integer.btn_pos, i);
@@ -103,7 +105,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
     private class ViewHolder {
 
-        protected ImageButton imageButton;
+        protected  ImageButton imageButton;
         protected  CheckBox checkBox;
+        protected  TextView textView;
     }
 }

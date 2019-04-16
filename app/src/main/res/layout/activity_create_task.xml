@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -25,19 +27,24 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Title" />
 
                 <EditText
                     android:id="@+id/taskName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="8"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/darkBlue"
+                    android:backgroundTint="@color/blueBackground"
                     android:inputType="textAutoCorrect"/>
 
                 <TextView
                     android:id="@+id/priority_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Priority" />
 
                 <Spinner
@@ -45,12 +52,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:entries="@array/priorities"
+                    android:layout_marginBottom="5dp"
                     android:fadeScrollbars="true" />
 
                 <TextView
                     android:id="@+id/task_type_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Type" />
 
                 <Spinner
@@ -59,26 +68,71 @@
                     android:layout_height="50dp"
                     android:entries="@array/task_types"
                     android:fadeScrollbars="true"
+                    android:layout_marginBottom="5dp"
                     android:prompt="@string/select_task_type" />
 
                 <TextView
                     android:id="@+id/notes_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="Notes" />
 
                 <EditText
                     android:id="@+id/taskNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="8"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/darkBlue"
+                    android:backgroundTint="@color/blueBackground"
                     android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/notify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Notification Date" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/date_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="8"
+                        android:textColor="@color/darkBlue"
+                        android:backgroundTint="@color/blueBackground"
+                        android:layout_weight="3" />
+
+                    <ImageButton
+                        android:id="@+id/btn_date"
+                        android:layout_width="50dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_calendar"
+                        android:backgroundTint="@color/blueBackground"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TimePicker
+                    android:id="@+id/time_picker"
+                    android:layout_weight="4"
+                    android:timePickerMode="spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
 
                 <Button
                     android:id="@+id/save_task_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blueBackground"
                     android:text="Save"/>
+
 
             </LinearLayout>
         </ScrollView>

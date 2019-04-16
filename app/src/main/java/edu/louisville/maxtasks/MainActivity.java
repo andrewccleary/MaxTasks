@@ -1,8 +1,19 @@
 package edu.louisville.maxtasks;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -17,6 +28,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import edu.louisville.maxtasks.Model.Task;
 import edu.louisville.maxtasks.TaskList;
 
@@ -25,14 +38,19 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mAddTaskButton;
     private TaskList tasks;
     ListView listView;
+    public static final String CHANNEL_ID = "123456";
+    public static int codeId  = 1;
+
+    public AlarmManager alarmMgr;
+    public PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
         setContentView(R.layout.activity_main);
 
         tasks = new TaskList();
-
         tasks.Add("MongoDB Exam",1,"Exam", "MongoDB in a Distributed Setting");
         tasks.Add("CECS 550 Homework 4",3,"Homework","Submit by April 17");
         tasks.Add("Capstone Team Meeting",3,"Activity","April 19, 2019");
@@ -46,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0082ff")));
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mAddTaskButton = findViewById(R.id.new_task_button);
@@ -53,22 +72,6 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.simpleListView);
         ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), tasks);
         listView.setAdapter(adapter);
-
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_LONG);
-            }
-        });*/
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Intent intent = new Intent(MainActivity.this, CreateTaskActivity.class).putExtra("Task", tasks.GetTask(i));
-               // startActivityForResult(intent, 2);
-                Toast.makeText(getApplicationContext(),"Test",Toast.LENGTH_LONG);
-            }
-        });
 
 
         mAddTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +103,19 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @Override

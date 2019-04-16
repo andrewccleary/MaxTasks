@@ -1,6 +1,8 @@
 package edu.louisville.maxtasks.Model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Task implements Serializable {
@@ -16,8 +18,8 @@ public class Task implements Serializable {
         this.priority = priority;
         this.category = category;
         this.notes = notes;
-
         this.completed = false;
+
     }
 
     public String getTaskName(){
@@ -59,6 +61,7 @@ public class Task implements Serializable {
     public void setNotes(String s){
         this.notes = s;
     }
+
 
     public List<Notification> getNotifications(){
         return this.notifications;

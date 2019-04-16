@@ -12,7 +12,7 @@ public class Homework extends Task {
     private float grade;
 
 
-    public Homework(String taskName, int priority, String notes, Date dueDate, Date startDate, int expectedDuration, String className){
+    public Homework(String taskName, int priority, String notes, Date notification, Date dueDate, Date startDate, int expectedDuration, String className){
         super(taskName, priority, "Homework",notes);
         this.dueDate = dueDate;
         this.startDate = startDate;
