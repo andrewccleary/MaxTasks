@@ -23,6 +23,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public void setTask(List<Task> tasks)
+    {
+        this.tasks = tasks;
+    }
+
     public void Add(String taskName, int priority, String category, String notes)
     {
         Task task = new Task(taskName, priority, category, notes);

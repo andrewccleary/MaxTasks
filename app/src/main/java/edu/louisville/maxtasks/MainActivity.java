@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +30,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import edu.louisville.maxtasks.Model.Task;
 import edu.louisville.maxtasks.TaskList;
@@ -44,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public AlarmManager alarmMgr;
     public PendingIntent alarmIntent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +61,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tasks = new TaskList();
-        tasks.Add("MongoDB Exam",1,"Exam", "MongoDB in a Distributed Setting");
-        tasks.Add("CECS 550 Homework 4",3,"Homework","Submit by April 17");
-        tasks.Add("Capstone Team Meeting",3,"Activity","April 19, 2019");
-        tasks.Add("SQL Injection Paper",4,"Homework","Complete Final Draft");
-        tasks.Add("Open Source Security Project",5,"Project","Group Project w/ Celine");
-        tasks.Add("Finish MaxTasks",6,"Project","Please hurry!");
+        Task t = new Task("MongoDB Exam",1,"Exam", "MongoDB in a Distributed Setting");
+        t.setNotificationDate(new Date("4/16/2019"));
+        tasks.Add(t);
+
+        t = new Task("CECS 550 Homework 4",3,"Homework","Submit by April 17");
+        t.setNotificationDate(new Date("4/18/2019"));
+        tasks.Add(t);
+
+        t = new Task("Capstone Team Meeting",3,"Activity","April 19, 2019");
+        t.setNotificationDate(new Date("4/19/2019"));
+        tasks.Add(t);
+
+        t = new Task("SQL Injection Paper",4,"Homework","Complete Final Draft");
+        t.setNotificationDate(new Date("4/21/2019"));
+        tasks.Add(t);
+
+        t = new Task("Open Source Security Project",5,"Project","Group Project w/ Celine");
+        t.setNotificationDate(new Date("4/22/2019"));
+        tasks.Add(t);
+
+        t = new Task("Finish MaxTasks",6,"Project","Please hurry!");
+        t.setNotificationDate(new Date("4/25/2019"));
+        tasks.Add(t);
+        //loadData();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -128,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -135,6 +164,9 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 Task task = (Task)data.getSerializableExtra("Task");
                 tasks.Add(task);
+                listView.invalidateViews();
+                //Log.d("tasname....: ", task.getTaskName());
+                //saveData();
             }
         }else if (requestCode ==2){
             if(resultCode == RESULT_OK) {
@@ -142,5 +174,35 @@ public class MainActivity extends AppCompatActivity {
                 tasks.Add(task);
             }
         }
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences3", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(tasks.Tasks());
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("shared preferences3", MODE_PRIVATE);
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("task list", null);
+            Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+            List<Object> ob = new ArrayList<>();
+            ob = gson.fromJson(json, type);
+            if(ob != null)
+            {
+                tasks.setTask((List<Task>)gson.fromJson(json, type));
+            }
+        }
+        catch(Exception ex)
+        {
+
+        }
+
+
     }
 }

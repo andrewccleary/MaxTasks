@@ -2,6 +2,7 @@ package edu.louisville.maxtasks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class ListViewAdapter extends BaseAdapter {
             holder = (ViewHolder)view.getTag();
         }
         Task task = tasks.Tasks().get(i);
-        holder.checkBox.setText(task.getTaskName());
+        holder.checkBox.setText(task.getTaskName() + " " + task.GetNotificationDateFormatted());
         holder.textView.setText(task.getNotes());
 
         holder.imageButton.setTag(R.integer.btn_edit, view);
@@ -92,6 +93,7 @@ public class ListViewAdapter extends BaseAdapter {
                 if(b == true)
                 {
                     compoundButton.setPaintFlags(compoundButton.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    Toast.makeText(context,tasks.GetTask(pos).getTaskName() + " is completed.",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

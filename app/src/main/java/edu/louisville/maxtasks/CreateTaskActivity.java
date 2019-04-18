@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -28,6 +29,7 @@ import java.util.Calendar;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.louisville.maxtasks.Model.Notification;
 import edu.louisville.maxtasks.Model.Task;
 
 public class CreateTaskActivity extends AppCompatActivity implements View.OnClickListener   {
@@ -76,10 +78,10 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
 
             if(task != null){
                 this.mTaskName.setText(task.getTaskName());
-
                 this.mTaskPriority.setSelection(((ArrayAdapter<String>)mTaskPriority.getAdapter()).getPosition((Integer.toString(task.getPriority()))));
                 this.mTaskTypeSpinner.setSelection(((ArrayAdapter<String>)mTaskTypeSpinner.getAdapter()).getPosition(task.getCategory()));
                 this.mTaskNotes.setText(task.getNotes());
+                this.mPickedDate.setText(task.GetNotificationDateFormatted());
             }
         }
 
@@ -112,7 +114,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         }
         else if(v == mSaveButton)
         {
-
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
             if(task != null){
                 task.setTaskName(mTaskName.getText().toString());
@@ -126,39 +128,47 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
                         Integer.parseInt(mTaskPriority.getSelectedItem().toString()),
                         mTaskTypeSpinner.getSelectedItem().toString(),
                         mTaskNotes.getText().toString());
+
+                Date d = new Date();
+                try{
+                     // here set the pattern as you date in string was containing like date/month/year
+                    d = sdf.parse(mPickedDate.getText().toString());
+                }catch(ParseException ex){
+                    // handle parsing exception if date string was different from the pattern applying into the SimpleDateFormat contructor
+                }
+                task.setNotificationDate(d);
             }
 
             Intent nIntent = new Intent();
             nIntent.putExtra("Task", task);
             setResult(RESULT_OK, nIntent);
+            if(task != null) {
+                AlarmManager alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class).putExtra("Title", task.getTaskName()).putExtra("Desc", task.getNotes());
 
-            AlarmManager alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class).putExtra("Title", task.getTaskName()).putExtra("Desc",task.getNotes());
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 5454, intent, 0);
 
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 232656451, intent, 0);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.MONTH, this.mMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, this.mDay);
+                calendar.set(Calendar.YEAR, this.mYear);
+                calendar.set(Calendar.HOUR_OF_DAY, mHour);
+                calendar.set(Calendar.MINUTE, mMinute);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.MONTH, this.mMonth);
-            calendar.set(Calendar.DAY_OF_MONTH, this.mDay);
-            calendar.set(Calendar.YEAR, this.mYear);
-            calendar.set(Calendar.HOUR_OF_DAY, mHour);
-            calendar.set(Calendar.MINUTE, mMinute);
+                //int hour = hourOfDay == "PM" ? mHour + 12 : mHour;
+                Log.d("hourOfDay:", hourOfDay);
+                Log.d("hours: ", Integer.toString(mHour));
+                calendar.set(Calendar.HOUR_OF_DAY, mHour);
 
-            int hour = hourOfDay == "PM" ? mHour + 12 : mHour;
-            Log.d("hourOfDay:", hourOfDay);
-            calendar.set(Calendar.HOUR_OF_DAY, hour);
+                //Log.d("Current Time:", Long.toString(calendar.getTimeInMillis()) + "  " + mdformat.format(calendar.getTime()));
 
-            //Log.d("Current Time:", Long.toString(calendar.getTimeInMillis()) + "  " + mdformat.format(calendar.getTime()));
+                Log.d("Calendar:", Long.toString(calendar.getTimeInMillis()));
+                Log.d("Total:", Long.toString((calendar.getTimeInMillis() - System.currentTimeMillis())));
 
-            Log.d("Calendar:", Long.toString(calendar.getTimeInMillis()));
-            Log.d("Total:", Long.toString((calendar.getTimeInMillis() - System.currentTimeMillis())));
-            //long waitingTime = calendar.getTimeInMillis() - System.currentTimeMillis() - ((hourOfDay == "PM") ? 86400000: 0);
-            long waitingTime = calendar.getTimeInMillis() - System.currentTimeMillis() - ((hourOfDay == "PM") ? 86400000: 0);
-            alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,  SystemClock.elapsedRealtime()+waitingTime
-                    , alarmIntent);
+                alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 
-
+            }
             finish();
         }
     }

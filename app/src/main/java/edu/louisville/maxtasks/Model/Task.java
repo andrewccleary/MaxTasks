@@ -1,6 +1,8 @@
 package edu.louisville.maxtasks.Model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Task implements Serializable {
     private List<Notification> notifications;
     private boolean completed;
     private String notes;
+    private Date notificationDate;
 
     public Task(String taskName, int priority, String category, String notes){
         this.taskName = taskName;
@@ -19,7 +22,7 @@ public class Task implements Serializable {
         this.category = category;
         this.notes = notes;
         this.completed = false;
-
+        notifications = new ArrayList<Notification>();
     }
 
     public String getTaskName(){
@@ -60,6 +63,24 @@ public class Task implements Serializable {
 
     public void setNotes(String s){
         this.notes = s;
+    }
+
+    public String GetNotificationDateFormatted()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        String rtn = "";
+        if(notificationDate != null) {
+            rtn = sdf.format(getNotificationDate().getTime());
+        }
+        return rtn;
+    }
+
+    public Date getNotificationDate(){
+        return this.notificationDate;
+    }
+
+    public void setNotificationDate(Date d){
+        this.notificationDate = d;
     }
 
 

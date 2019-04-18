@@ -12,11 +12,10 @@ public class Notification {
     private FrequencyType frequencyType;
     private int frequency;
 
-    public Notification(String title, Date notificationTime, FrequencyType frequencyType, int frequency){
-        this.title = title;
+    public Notification(Date notificationTime){
+
         this.notificationTime = notificationTime;
-        this.frequencyType = frequencyType;
-        this.frequency = frequency;
+
     }
 
     public String getTitle(){
